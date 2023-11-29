@@ -1,0 +1,9 @@
+customtkinter
+ctk
+pyperclip
+asyncio
+CTkMessagebox
+future
+Pillow
+bitarray
+numpy
