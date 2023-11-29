@@ -1,0 +1,42 @@
+name: Test
+
+# Запускається при події push у
+# будь яку гілку, окрім main
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  test:
+  
+    # Визначення налаштувань для матриці запуску
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    # Визначення кроків
+    steps:
+    
+      # Копіювання репозиторію
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Налаштування Python 3.11
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      # Встановлення потрібних бібліотек
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Запуск тестів
+      - name: Test with pytest
+        run: |
+          pip install pytest pytest-cov
+          pytest --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
