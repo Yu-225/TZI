@@ -32,7 +32,7 @@ jobs:
       # AAaa
       - name: Add project to PYTHONPATH
         run: |
-          export PYTHONPATH="${PYTHONPATH}:${{ github.workspace }}"
+          nohup PYTHONPATH="${PYTHONPATH}:${{ github.workspace }}"
         working-directory: ${{ github.workspace }}
 
       # Встановлення потрібних бібліотек
