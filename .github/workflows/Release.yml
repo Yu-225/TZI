@@ -39,7 +39,7 @@ jobs:
           dir ./dist
 
         
-release:
+  release:
     needs: build
     runs-on: ubuntu-latest
 
