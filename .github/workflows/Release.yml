@@ -38,30 +38,18 @@ jobs:
         run: |
           dir ./dist
 
-        
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Upload exe to release
-        uses: actions/upload-artifact@v2
-        with:
-          name: app.exe
-          path: dist/app.exe
-
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: ${{ github.run_number }}
-          release_name: Release ${{ github.run_number }}
+          tag_name: v1.0.0  # Вкажіть номер версії, або використовуйте якийсь інший механізм автоматичного визначення версії
+          release_name: Release v1.0.0
           body: |
             Changes in this Release
           draft: false
           prerelease: false
-
+      
       - name: Upload Artifact to Release
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
