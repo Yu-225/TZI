@@ -33,15 +33,20 @@ jobs:
         run: |
           pyinstaller --noconfirm --onefile --windowed --icon "img/icon.ico" --add-data "C:\hostedtoolcache\windows\Python\3.11.6\x64\Lib\site-packages\customtkinter;customtkinter"  "app.py"
         working-directory: ${{ github.workspace }}
+      
+      - name: Check files existence
+        run: |
+          dir ./dist
 
+        
   release:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Upload exe to release
         uses: actions/upload-artifact@v2
         with:
           name: app.exe
-          path: dist/*
+          path: ${{ github.workspace }}/dist/* 
 
