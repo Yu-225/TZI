@@ -30,10 +30,10 @@ jobs:
           python-version: 3.11
 
       # AAaa
-      - name: Add project to PYTHONPATH
-        run: |
-          nohup PYTHONPATH="${PYTHONPATH}:${{ github.workspace }}"
+      - name: Set up Python path
+        run: echo "::set-env name=PYTHONPATH::${{ github.workspace }}"
         working-directory: ${{ github.workspace }}
+
 
       # Встановлення потрібних бібліотек
       - name: Install dependencies
