@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: windows-latest
@@ -38,22 +41,17 @@ jobs:
         run: |
           dir ./dist
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: github.event_name == 'push' && github.event.ref == 'refs/heads/main'
         with:
-          tag_name: v1.0.0  # Вкажіть номер версії, або використовуйте якийсь інший механізм автоматичного визначення версії
-          release_name: Release v1.0.0
+          files: dist/*
+          tag_name: ${{ github.sha }}
+          release_name: Release ${{ github.sha }}
           body: |
             Changes in this Release
           draft: false
           prerelease: false
-      
-      - name: Upload Artifact to Release
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/app.exe
-          asset_name: app.exe
-          asset_content_type: application/octet-stream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
