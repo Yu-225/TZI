@@ -39,9 +39,9 @@ jobs:
           dir ./dist
 
         
-  release:
+release:
     needs: build
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Upload exe to release
@@ -49,11 +49,12 @@ jobs:
         with:
           name: app.exe
           path: dist/app.exe
-          
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
           body: |
@@ -69,4 +70,3 @@ jobs:
           asset_path: dist/app.exe
           asset_name: app.exe
           asset_content_type: application/octet-stream
-
