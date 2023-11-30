@@ -36,7 +36,7 @@ jobs:
         run: |
           pyinstaller --noconfirm --onefile --windowed --icon "img/icon.ico" --add-data "C:\hostedtoolcache\windows\Python\3.11.6\x64\Lib\site-packages\customtkinter;customtkinter"  "app.py"
         working-directory: ${{ github.workspace }}
-
+      
       - name: Check files existence
         run: |
           dir ./dist
