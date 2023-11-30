@@ -1,5 +1,5 @@
 import pytest
-from LinearComparison import LinearComparison
+from modules.LinearComparison import LinearComparison
 
 
 @pytest.fixture
