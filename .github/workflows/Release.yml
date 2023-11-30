@@ -42,7 +42,6 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: v1.0.0  # Вкажіть номер версії, або використовуйте якийсь інший механізм автоматичного визначення версії
           release_name: Release v1.0.0
           body: |
