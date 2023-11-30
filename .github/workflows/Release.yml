@@ -31,7 +31,7 @@ jobs:
 
       - name: Build exe with PyInstaller
         run: |
-          pyinstaller --noconfirm --onefile --windowed --icon "pictures/icon.ico" --add-data "C:\hostedtoolcache\windows\Python\3.11.6\x64\Lib\site-packages\customtkinter;customtkinter"  "app.py"
+          pyinstaller --noconfirm --onefile --windowed --icon "img/icon.ico" --add-data "C:\hostedtoolcache\windows\Python\3.11.6\x64\Lib\site-packages\customtkinter;customtkinter"  "app.py"
         working-directory: ${{ github.workspace }}
 
   release:
