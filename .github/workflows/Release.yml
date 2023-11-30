@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  release:
     runs-on: windows-latest
 
     steps:
@@ -39,11 +39,6 @@ jobs:
           dir ./dist
 
         
-  release:
-    needs: build
-    runs-on: windows-latest
-
-    steps:
       - name: Upload exe to release
         uses: actions/upload-artifact@v2
         with:
