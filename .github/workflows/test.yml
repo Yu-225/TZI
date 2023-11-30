@@ -29,6 +29,12 @@ jobs:
         with:
           python-version: 3.11
 
+      # AAaa
+      - name: Add project to PYTHONPATH
+        run: |
+          export PYTHONPATH="${PYTHONPATH}:${{ github.workspace }}"
+        working-directory: ${{ github.workspace }}
+
       # Встановлення потрібних бібліотек
       - name: Install dependencies
         run: |
