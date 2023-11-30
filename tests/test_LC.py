@@ -1,5 +1,5 @@
 import pytest
-from TZI.modules.LinearComparison import LinearComparison
+from LinearComparison import LinearComparison
 
 
 @pytest.fixture
