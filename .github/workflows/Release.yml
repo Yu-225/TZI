@@ -46,12 +46,11 @@ jobs:
         if: github.event_name == 'push' && github.event.ref == 'refs/heads/main'
         with:
           files: dist/*
-          tag_name: ${{ github.sha }}
-          release_name: Release ${{ github.sha }}
+          tag_name: ${{ github.run_id }}
+          release_name: Release ${{ github.run_id }}
           body: |
             Changes in this Release
           draft: false
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
