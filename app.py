@@ -16,7 +16,7 @@ class App(ctk.CTk):
         self.title("ТЗІ")
         self.geometry(f"{560}x{650}")
         self.resizable(False, False)
-        self.iconbitmap('img/icon.ico')
+        # self.iconbitmap('img/icon.ico')
 
         # Create tab view
         self.tab_view = TabView(master=self)

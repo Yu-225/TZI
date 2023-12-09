@@ -1,7 +1,7 @@
 import customtkinter as ctk
 import webbrowser
 import subprocess
-
+from threading import Thread
 
 class DrawHome(ctk.CTkFrame):
     def __init__(self, master, **kwargs):
