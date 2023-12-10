@@ -20,10 +20,10 @@ class DrawLab4(ctk.CTkFrame):
         # A
         self.speedtest_file = None
         self.file_extension = None
-        self.output_folder = 'D:/LABS/Labs 3.1/Технології захисту інформації/github/TZI/RSA/output'
+        self.output_folder = './RSA/output'
         self.file_to_enc = None
         self.file_to_dec = None
-        self.keys_folder_path = 'D:/LABS/Labs 3.1/Технології захисту інформації/github/TZI/RSA/key_folder'
+        self.keys_folder_path = './RSA/key_folder'
         self.public_key_path = None
         self.private_key_path = None
 

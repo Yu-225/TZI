@@ -6,7 +6,7 @@ from cryptography.hazmat.primitives.asymmetric import rsa, padding
 
 class RSA:
     def __init__(self):
-        self.keys_folder_path = './RSA/key_folder'
+        self.keys_folder_path = os.path.join('RSA', 'key_folder')
         self.private_key_path = os.path.join(self.keys_folder_path, 'private_key.pem')
         self.public_key_path = os.path.join(self.keys_folder_path, 'public_key.pem')
         if not os.path.exists(self.keys_folder_path):

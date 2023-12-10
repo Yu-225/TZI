@@ -1,4 +1,10 @@
 tests/.pytest_cache
+tests/DSS
+tests/RSA
+RSA
+DSS
+logs
+
 
 
 # Byte-compiled / optimized / DLL files
