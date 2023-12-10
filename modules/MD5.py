@@ -30,6 +30,8 @@ class MD5:
     def hash(self, string):
         if isinstance(string, str):
             self._string = string.encode('utf-8')
+        else:
+            self._string = string
 
         preprocessed_bit_array = self._step_2(self._step_1())
         self._step_3()
@@ -193,6 +195,3 @@ class MD5:
 
         # Output the buffers in upper-case hexadecimal format.
         return f"{format(A, '08x')}{format(B, '08x')}{format(C, '08x')}{format(D, '08x')}".upper()
-
-
-

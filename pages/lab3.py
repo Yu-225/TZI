@@ -238,10 +238,9 @@ class DrawLab3(ctk.CTkFrame):
         self.chose_path.configure(text=file_path)
 
     def choose_folder(self):
-        folder_path = filedialog.askdirectory()
-        self.selected_folder = folder_path
+        self.selected_folder = filedialog.askdirectory()
         self.output_folder.configure(text="Folder Selected:")
-        self.folder_path.configure(text=folder_path)
+        self.folder_path.configure(text=self.selected_folder)
 
     def open_output_folder(self):
         if self.selected_folder:
