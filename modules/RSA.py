@@ -40,7 +40,7 @@ class RSA:
             )
             public_key_file.write(public_key_pem)
 
-        print("Ключова пара створена та збережена у файлах 'private_key.pem' та 'public_key.pem'.")
+        # print("Ключова пара створена та збережена у файлах 'private_key.pem' та 'public_key.pem'.")
 
     def encrypt_message(self, message, public_key_file):
         # Завантажуємо публічний ключ з файлу

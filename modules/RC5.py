@@ -1,10 +1,6 @@
 from modules.MD5 import MD5 as my_md5
 from math import ceil
 
-w = 64  # bits
-r = 8   # rounds
-b = 32  # bytes (8, 16, 32)
-
 
 class RC5:
     def __init__(self, w, r, b, key_phrase):
@@ -39,16 +35,16 @@ class RC5:
     def _key_hash(self):
         md5 = my_md5()
 
-        if b == 8:
+        if self.b == 8:
             md5.update(self.key_phrase)
             key_phrase_hash = md5.digest()
             self.K = key_phrase_hash[8:]
 
-        elif b == 16:
+        elif self.b == 16:
             md5.update(self.key_phrase)
             self.K = md5.digest()
 
-        elif b == 32:
+        elif self.b == 32:
             md5.update(self.key_phrase)
             key_phrase_1 = md5.digest()
             md5.update(key_phrase_1)
@@ -58,7 +54,6 @@ class RC5:
     def _L(self):
         for i in range(self.b - 1, -1, -1):
             self.L[(self.b - 1 - i) // self.u] = (self.L[(self.b - 1 - i) // self.u] << 8) + self.K[i]
-        print(self.L)
 
     def _S(self):
 
@@ -73,7 +68,6 @@ class RC5:
         for i in range(1, self.t):
             # S[i] = S[i - 1] + Qw
             self.S[i] = (self.S[i - 1] + Qw) & ((1 << self.w) - 1)
-        print(self.S)
 
     def _shufle(self):
         i, j, A, B = 0, 0, 0, 0
@@ -82,7 +76,6 @@ class RC5:
             B = self.L[j] = self._rotate_left((self.L[j] + A + B), A + B)
             i = (i + 1) % self.t
             j = (j + 1) % self.c
-        print(self.S)
 
     def create_sub_keys(self):
         self._key_hash()
@@ -100,10 +93,6 @@ class RC5:
         for i in range(1, self.r + 1):
             A = (self._rotate_left((A ^ B), B) + self.S[2 * i]) % self.mod
             B = (self._rotate_left((A ^ B), A) + self.S[2 * i + 1]) % self.mod
-
-        print(A)
-        print(B)
-        print(A.to_bytes(self.u, byteorder='little') + B.to_bytes(self.u, byteorder='little'))
 
         return A.to_bytes(self.u, byteorder='little') + B.to_bytes(self.u, byteorder='little')
 
@@ -154,7 +143,6 @@ class RC5:
                     break
 
                 if len(text) != self.w4:
-                    print('len', len(text))
                     while len(text) != self.w4:
                         text += b'\x00'
                         self.nulbits += 1
@@ -162,8 +150,6 @@ class RC5:
 
                 text = self.encrypt_block(text)
                 out.write(text)
-
-            print(self.nulbits)
 
     def decrypt_file(self, inpFileName, outFileName):
         with open(inpFileName, 'rb') as inp, open(outFileName, 'wb') as out:
@@ -174,23 +160,12 @@ class RC5:
                 text = self.decrypt_block(text)
                 out.write(text)
 
+    def _cut_off_this_fucking_null_bits(self, file):
 
-# rc5 = RC5(64, 8, 32, b'qwertyuiop1234567890   qwertyu12')
-#
-# pt = b'hello world'
-# et = rc5.encryptBytes(pt)
-# print('pt -', pt, ' >> rc5 >>  et -', et)
-# dt = rc5.decryptBytes(et)
-# print('et -', et, ' >> rc5 >>  dt -', dt)
+        with open(file, 'rb') as f:
+            data = f.read()
+            for i in range(self.nulbits):
+                data = data[:-1]
 
-# D:\LABS\Labs 3.1\Технології захисту інформації\main\congig.ini
-# file_path = r'C:\Users\YuLap\OneDrive\Робочий стіл\4c250818f831b6fc62b59896b7739a1a.jpg'
-# enc_path = r'C:\Users\YuLap\OneDrive\Робочий стіл\out_enc.jpg'
-# dec_path = r'C:\Users\YuLap\OneDrive\Робочий стіл\out_dec.jpg'
-#
-#
-# rc5.encryptFile(file_path, enc_path)
-# rc5.decryptFile(enc_path, dec_path)
-
-
-
+        with open(file, 'wb') as f:
+            f.write(data)

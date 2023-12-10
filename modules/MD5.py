@@ -195,4 +195,3 @@ class MD5:
 
         # Output the buffers in upper-case hexadecimal format.
         return f"{format(A, '08x')}{format(B, '08x')}{format(C, '08x')}{format(D, '08x')}".upper()
-

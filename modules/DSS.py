@@ -9,9 +9,11 @@ import base64
 
 class DSS:
     def __init__(self):
-        self.private_key_path = os.path.join('DSS', 'key_folder', 'dss_private_key.pem')
-        self.public_key_path = os.path.join('DSS', 'key_folder', 'dss_public_key.pem')
-
+        self.keys_folder_path = './DSS/key_folder'
+        self.private_key_path = os.path.join(self.keys_folder_path, 'dss_private_key.pem')
+        self.public_key_path = os.path.join(self.keys_folder_path, 'dss_public_key.pem')
+        if not os.path.exists(self.keys_folder_path):
+            os.makedirs(self.keys_folder_path)
 
     def generate_key(self):
         private_key = rsa.generate_private_key(
