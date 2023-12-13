@@ -3,7 +3,7 @@ from tkinter import filedialog
 
 import customtkinter as ctk
 from CTkMessagebox import CTkMessagebox
-from modules.DSS import DSS
+from modules.DSS_OLD import DSS
 import pyperclip
 
 
